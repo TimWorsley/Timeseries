@@ -1,0 +1,52 @@
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600' rel='stylesheet' type='text/css'>
+<link href='styles/DefineTimeseries.css' rel='stylesheet' type='text/css'>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript">
+    setTimeout(function sunrise () {
+        document.getElementsByClassName('header')[0].style.backgroundColor = '#118798';
+    }, 0);
+</script>
+<div class="default-page">
+    <div class="header">
+        <h1 id="main-title" class="container"><%= __('Stock Data Viewer') %></h1>
+    </div>
+    <form action='timeseriesreport/requesttimeseriesreport'>
+    <div class="main container clearfix">
+        <ul class="getting-started">
+            <li class="clearfix">
+                <div class="step">
+                    <div class="sprite one"></div>
+                    <h3>
+                        Input start and end date (YYYY-MM-DD):
+                    </h3>
+                    <p>
+                        <input type="text" name="start_date" id="start_date" value="2017-01-01"/> through <input type="text" name="end_date" id="end_date" value="2017-06-30"/>
+                    </p>
+                </div>
+            </li>
+            <li class="clearfix">
+                <div class="step">
+                    <div class="sprite two"></div>
+                    <h3>
+                        Input comma separated symbols list:
+                    </h3>
+                    <p>
+                        <input type="text" name="symbols" id="symbols" value="COF, GOOG, MSFT"/>
+                    </p>
+                </div>
+            </li>
+            <li class="clearfix">
+                    <div class="step">
+                        <div class="sprite three"></div>
+                        <input type="submit" value="Display Data"/>
+                    </div>
+                </li>
+        </ul>
+    </div>
+    </form>
+    <div name="display_stock_data" id="display_stock_data">
+    </div>
+    <div name="debug" id="debug">
+    </div>
+</div>

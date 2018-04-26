@@ -1,0 +1,51 @@
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="/js/RenderReport.js" type="text/javascript"></script>
+<% 
+for (var tsIndex in timeseriesList) {
+    var ts = timeseriesList[tsIndex];
+    var headerId = "header_" + ts.symbol;
+    var reportId = "report_" + ts.symbol;
+    var volumeId = "volume_" + ts.symbol;
+    var winner = "";
+    if ("hasMostLosingDays" in ts) {
+        winner = "(this is the most of any symbol)";
+    }
+%>
+<div id="<%= headerId %>">
+<input type="hidden" id="timeseries_list" value="<%=JSON.stringify(timeseriesList)%>"/>
+    <h3><%= ts.symbol %> (winning days in light blue, losing days in light grey)</h3>
+<h3><%= ts.losingDays %> days down <%= winner %></h3>
+<h3>Average open in blue, average close in red per month</h3>
+</div>
+<div id="<%= reportId %>"/>
+<div id="<%= volumeId %>"/>
+<%
+}
+%>
+<a id='downloadJson' download='report.json' type='text/json'>Download JSON</a>
+<div id="debug">
+</div>
+<script type="text/javascript">
+function debug_log(msg) {
+    var debugId = document.getElementById('debug');
+    debugId.innerHTML = debugId.innerHTML + msg + "<br>";
+}
+var tsElement = document.getElementById('timeseries_list');
+var tsString = tsElement.value;
+var timeseriesList = JSON.parse(tsString);
+var tsBlob = new Blob([tsString]);
+var downloadJsonElement = document.getElementById('downloadJson');
+downloadJsonElement.href = URL.createObjectURL(tsBlob);
+
+//var did = document.getElementById('debug');
+//did.innerHTML=did.innerHTML + JSON.stringify(timeseriesList) + "ham";
+for (var tsIndex in timeseriesList) {
+    var ts = timeseriesList[tsIndex];
+    var reportId = 'report_' + ts.symbol;
+    var volumeId = 'volume_' + ts.symbol;
+    
+    RenderReport(reportId, volumeId, ts);
+}
+</script>
+
+

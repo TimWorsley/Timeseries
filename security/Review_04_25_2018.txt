@@ -1,0 +1,25 @@
+The data handled by this website is classified as category 5, "Already in the public domain".  
+The sole exception to that is the Quandl API key, for which an Incident Response Plan has
+been generated for its loss to attackers.  Architectural considerations were also suggested to
+protect this key.
+
+Architectural considerations
+To protect the API key, it must not be sent to the client.  That means that our back-end must
+handle all data requests to Quandl.  While it was possible to build an asynchronous data
+queue for Quandl data, it was decided that the projected load estimate for this website 
+allowed a simpler Synchronous design.  Should web traffic exceed expectations, a second phase
+development of a back-end asynchronous data queue with server to client notifications would
+have to be funded.
+
+Incident Response Plan
+1) Disable all web hosts running the website, so that the attacker cannot use them to launch
+attacks against us with our own hardware
+2) Contact Quandl at https://help.quandl.com/contact and alert them of the loss of the key, and
+request a new key
+3) Modify ./config/quandl.js with the new API key
+4) Patch the vulnerability used by the attackers
+5) Re-deploy
+
+Future considerations
+Should funding be found for our remote key server project, and that project complete, the
+Quandl API key should be moved to that server.
