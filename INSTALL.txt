@@ -1,0 +1,11 @@
+Installation instructions:
+Install Node https://nodejs.org/en/download/
+Install Javascript, if necessary
+Install NPM, if necessary
+CD to directory
+type 'npm install'
+(wait a while)
+type 'npm test' - will catch most install errors
+type 'npm start' to launch the website
+(wait for it to say "verbose: Grunt:: Waiting...")
+Point your browser at "http://localhost:1337"
